@@ -30,14 +30,16 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
         #region Price Property
         builder.Property(service => service.Price)
             .HasColumnName("price")
+            .HasColumnType("decimal(10,2)")
             .IsRequired();
         #endregion
 
-        #region Navigation
+        #region Relationships
+        // Service -> ReservationService (One-to-Many)
         builder.HasMany(service => service.ReservationServices)
             .WithOne(reservationServices => reservationServices.Service)
             .HasForeignKey(reservationServices => reservationServices.ServiceId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         #endregion
     }
 }

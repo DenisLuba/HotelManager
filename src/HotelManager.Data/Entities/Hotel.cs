@@ -1,12 +1,18 @@
 ﻿namespace HotelManager.Data.Entities;
 
-public record Hotel(
-    int Id,
-    string Name,
-    string Address,
-    double? Raiting,
-    string? Description,
-    bool IsMainHotel,
-    ICollection<Room> Rooms
-);
+public class Hotel
+{
+    #region Columns
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public double? Raiting { get; set; }
+    public string? Description { get; set; }
+    public bool IsMainHotel { get; set; }
+    #endregion
+
+    #region Navigation Collection
+    public ICollection<Room> Rooms { get; set; } = []; 
+    #endregion
+}
 

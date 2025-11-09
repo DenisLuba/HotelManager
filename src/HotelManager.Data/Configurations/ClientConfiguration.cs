@@ -53,16 +53,16 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
         // Email Constraint
         builder.ToTable(table => table.HasCheckConstraint(             // CONSTRAINT
                 name: "email_check",                                   // "email_check
-                sql: "email LIKE '%_@_%._%'"));                        // CHECK("email" LIKE '%_@_%._%')
+                sql: "\"email\" LIKE '%_@_%._%'"));                    // CHECK("email" LIKE '%_@_%._%')
 
         // PhoneNumber Constraint
         builder.ToTable(table => table.HasCheckConstraint(             // CONSTRAINT
                 name: "phone_check",                                   // "phone_check"
-                sql: "length(phone_number) BETWEEN 10 AND 13"));       // CHECK(length("phone_number") BETWEEN 10 AND 13)
+                sql: "length(\"phone_number\") BETWEEN 10 AND 13"));   // CHECK(length("phone_number") BETWEEN 10 AND 13)
         #endregion
 
-        #region Navigation 
-        // Навигация (один клиент -> много бронирований (Reservations))
+        #region Relationships 
+        // Client -> Reservation (один клиент -> много бронирований (Reservations))
         builder.HasMany(client => client.Reservations)
                .WithOne(reservations => reservations.Client)
                .HasForeignKey(reservations => reservations.ClientId)

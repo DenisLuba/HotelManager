@@ -1,8 +1,10 @@
 ﻿namespace HotelManager.Data.Entities;
 
-public record RoomType(
-    int Id,
-    string TypeName,
-    string? Description,
-    ICollection<Room> Rooms
-);
+public class RoomType
+{
+    public int Id { get; set; }
+    public string TypeName { get; set; } = string.Empty;
+    public string? Description { get; set; }
+
+    public ICollection<Room> Rooms { get; set; } = [];
+}

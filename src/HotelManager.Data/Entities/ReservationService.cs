@@ -1,9 +1,15 @@
 ﻿namespace HotelManager.Data.Entities;
 
-public record ReservationService(
-    int ReservationId,
-    int ServiceId,
-    Reservation Reservation,
-    Service Service
-);
+public class ReservationService
+{
+    #region Columns
+    public int ReservationId { get; set; }
+    public int ServiceId { get; set; } 
+    #endregion
+
+    #region Navigation
+    public Reservation Reservation { get; set; } = null!;
+    public Service Service { get; set; } = null!; 
+    #endregion
+}
 

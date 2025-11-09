@@ -35,7 +35,7 @@ public class RoomTypeConfiguration : IEntityTypeConfiguration<RoomType>
                .HasMaxLength(250);
         #endregion
 
-        #region Navigation
+        #region Relationships
         builder.HasMany(roomType => roomType.Rooms)
                .WithOne(rooms => rooms.RoomType)
                .HasForeignKey(rooms => rooms.RoomTypeId)

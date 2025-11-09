@@ -48,7 +48,7 @@ public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
                .HasColumnName("raiting");
         #endregion
 
-        #region Navigation
+        #region Relationships
         // одна гостиница -> много комнат
         builder.HasMany(hotel => hotel.Rooms)
                .WithOne(rooms => rooms.Hotel)
