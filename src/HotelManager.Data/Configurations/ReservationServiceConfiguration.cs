@@ -27,13 +27,13 @@ public class ReservationServiceConfiguration : IEntityTypeConfiguration<Reservat
         builder.HasOne(reservationService => reservationService.Reservation)
             .WithMany(reservation => reservation.ReservationServices)
             .HasForeignKey(reservationService => reservationService.ReservationId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade); // при удалении бронирования удалится и бронирование услуги
 
         // ReservationService -> Service (Many-To-One)
         builder.HasOne(reservationService => reservationService.Service)
             .WithMany(service => service.ReservationServices)
             .HasForeignKey(reservationService => reservationService.ServiceId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade); // при удалении услуги удалится и бронирование этой услуги
         #endregion
     }
 }

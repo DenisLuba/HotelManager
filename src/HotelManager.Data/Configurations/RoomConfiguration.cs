@@ -62,19 +62,19 @@ public class RoomConfiguration : IEntityTypeConfiguration<Room>
         builder.HasOne(room => room.Hotel)
             .WithMany(hotel => hotel.Rooms)
             .HasForeignKey(room => room.HotelId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade); // при удалении отеля удалятся все его комнаты
 
         // Room -> RoomType (Many-to-One)
         builder.HasOne(room => room.RoomType)
             .WithMany(roomType => roomType.Rooms)
             .HasForeignKey(room => room.RoomTypeId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict); // при удалении типа комнат будет ошибка, если есть комнаты этого типа
 
         // Room -> Reservation (One-to-Many)
         builder.HasMany(room => room.Reservations)
             .WithOne(reservation => reservation.Room)
             .HasForeignKey(reservation => new { reservation.HotelId, reservation.RoomNumber })
-            .OnDelete(DeleteBehavior.Cascade); 
+            .OnDelete(DeleteBehavior.Cascade); // при удалении комнаты удалятся все бронирования этой комнаты
         #endregion
     }
 }

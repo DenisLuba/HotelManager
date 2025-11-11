@@ -64,7 +64,7 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             .HasPrincipalKey(room => new {room.HotelId,  room.RoomNumber})
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Reservatin -> ReservatinService (One-To-Many)
+        // Reservation -> ReservatinService (One-To-Many)
         builder.HasMany(reservation => reservation.ReservationServices)
             .WithOne(reservationService => reservationService.Reservation)
             .HasForeignKey(reservationService => reservationService.ReservationId)

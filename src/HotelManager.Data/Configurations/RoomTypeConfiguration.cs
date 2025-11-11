@@ -36,10 +36,11 @@ public class RoomTypeConfiguration : IEntityTypeConfiguration<RoomType>
         #endregion
 
         #region Relationships
+        // Один тип -> Много комнат
         builder.HasMany(roomType => roomType.Rooms)
                .WithOne(rooms => rooms.RoomType)
                .HasForeignKey(rooms => rooms.RoomTypeId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .OnDelete(DeleteBehavior.Restrict); // при удалении типа комнат, если есть комнаты этого типа, будет ошибка
         #endregion
     }
 }

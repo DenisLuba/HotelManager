@@ -23,18 +23,21 @@ public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
         #region Name Property
         builder.Property(hotel => hotel.Name)
                .HasColumnName("name")
+               .HasMaxLength(100)
                .IsRequired();
         #endregion
 
         #region Address Property
         builder.Property(hotel => hotel.Address)
                .HasColumnName("address")
+               .HasMaxLength(100)
                .IsRequired();
         #endregion
 
         #region Description Property
         builder.Property(hotel => hotel.Description)
-               .HasColumnName("description");
+               .HasColumnName("description")
+               .HasMaxLength(250);
         #endregion
 
         #region IsMainHotel Property
@@ -51,9 +54,9 @@ public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
         #region Relationships
         // одна гостиница -> много комнат
         builder.HasMany(hotel => hotel.Rooms)
-               .WithOne(rooms => rooms.Hotel)
-               .HasForeignKey(rooms => rooms.HotelId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .WithOne(room => room.Hotel)
+               .HasForeignKey(room => room.HotelId)
+               .OnDelete(DeleteBehavior.Cascade); // при удалении отеля удалятся все комнаты
         #endregion
     }
 }
