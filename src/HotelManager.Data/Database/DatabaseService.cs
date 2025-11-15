@@ -1,12 +1,9 @@
-﻿namespace HotelManager.Data.Database;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class DatabaseService
+namespace HotelManager.Data.Database;
+
+public class DatabaseService(IDbContextFactory<HotelDbContext> contextFactory)
 {
-    #region Unknown Method
-
-    #endregion
+    public async Task<HotelDbContext> CreateContextAsync()
+        => await contextFactory.CreateDbContextAsync();
 }
-
-#region Unknown Method
-
-#endregion
