@@ -2,61 +2,81 @@
 
 namespace HotelManager.Data.Repositories.Interfaces;
 
+/// <summary>
+/// Generic repository interface providing basic CRUD operations
+/// and query capabilities for a given entity type.
+/// </summary>
+/// <typeparam name="T">Entity type</typeparam>
 public interface IRepository<T> where T : class
 {
     /// <summary>
-    /// Get entity by Id
+    /// Retrieves a single entity by its unique identifier.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
+    /// <param name="id">Entity identifier</param>
+    /// <returns>
+    /// The entity instance if found; otherwise null.
+    /// </returns>
     Task<T?> GetByIdAsync(int id);
 
     /// <summary>
-    /// Get all entities
+    /// Retrieves all entities of the given type.
     /// </summary>
-    /// <returns></returns>
-    Task<IEnumerable<T?>> GetAllAsync();
+    /// <returns>
+    /// Collection of all entities. Returns an empty collection if no entities exist.
+    /// </returns>
+    Task<IEnumerable<T>> GetAllAsync();
 
     /// <summary>
-    /// Add entity
+    /// Adds a new entity to the data source.
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    Task AddAsync(T? entity);
+    /// <param name="entity">Entity to add</param>
+    /// <returns>
+    /// The entity instance if it is added; otherwise null.
+    /// </returns>
+    Task<T?> AddAsync(T? entity);
 
     /// <summary>
-    /// Add multiple entities
+    /// Adds multiple entities to the data source.
     /// </summary>
-    /// <param name="entities"></param>
-    /// <returns></returns>
-    Task AddRangeAsync(IEnumerable<T>? entities);
+    /// <param name="entities">Collection of entities to add</param>
+    /// <returns>
+    /// Number of state entries written to the database.
+    /// </returns>
+    Task<int> AddRangeAsync(IEnumerable<T?>? entities);
 
     /// <summary>
-    /// Remove entity
+    /// Removes an entity from the data source.
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    Task RemoveAsync(T? entity);
+    /// <param name="entity">Entity instance to remove</param>
+    /// <returns>
+    /// The entity instance if it is removed; otherwise null.
+    /// </returns>
+    Task<T?> RemoveAsync(T? entity);
 
     /// <summary>
-    /// Remove multiple entities
+    /// Removes multiple entities from the data source.
     /// </summary>
     /// <param name="entities">Entities to remove</param>
-    /// <returns>Task</returns>
-    Task RemoveRangeAsync(IEnumerable<T>? entities);
+    /// <returns>
+    /// Number of state entries written to the database.
+    /// </returns>
+    Task<int> RemoveRangeAsync(IEnumerable<T?>? entities);
 
-    // Для гибких запросов
     /// <summary>
-    /// Find entities by condition
+    /// Retrieves entities matching the specified filter expression.
     /// </summary>
-    /// <param name="func"></param>
-    /// <returns></returns>
+    /// <param name="func">Predicate expression used for filtering entities</param>
+    /// <returns>
+    /// Collection of entities matching the provided condition.
+    /// Returns an empty collection if no matching entities exist.
+    /// </returns>
     Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> func);
 
-    // Сохранение изменений
     /// <summary>
-    /// Save changes to the data source
+    /// Saves all pending changes to the underlying data source.
     /// </summary>
-    /// <returns></returns>
-    Task<int> SaveChangesAsync();
+    /// <returns>
+    /// Number of state entries written to the database.
+    /// </returns>
+    Task<int> SaveRepositoryChangesAsync();
 }

@@ -1,7 +1,10 @@
-﻿namespace HotelManager.Data.Repositories.Implementations;
+﻿using HotelManager.Data.Database;
+using HotelManager.Data.Entities;
+using HotelManager.Data.Repositories.Interfaces;
 
-public class ReservationRepository
+namespace HotelManager.Data.Repositories.Implementations;
+
+public class ReservationRepository(HotelDbContext context) : Repository<Reservation>(context), IReservationRepository
 {
-
 }
 

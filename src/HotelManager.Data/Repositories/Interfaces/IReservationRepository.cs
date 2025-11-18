@@ -1,5 +1,7 @@
-﻿namespace HotelManager.Data.Repositories.Interfaces;
+﻿using HotelManager.Data.Entities;
 
-public interface IReservationRepository
+namespace HotelManager.Data.Repositories.Interfaces;
+
+public interface IReservationRepository : IRepository<Reservation>
 {
 }

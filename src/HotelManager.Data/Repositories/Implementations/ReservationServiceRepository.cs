@@ -4,6 +4,8 @@ using HotelManager.Data.Repositories.Interfaces;
 
 namespace HotelManager.Data.Repositories.Implementations;
 
-public class RoomTypeRepository(HotelDbContext context) : Repository<RoomType>(context), IRoomTypeRepository
+public class ReservationServiceRepository(HotelDbContext context) 
+    : Repository<ReservationService>(context), IReservationServiceRepository
 {
 }
+

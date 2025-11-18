@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HotelManager.Data.Entities;
 
-namespace HotelManager.Data.Repositories.Interfaces
+namespace HotelManager.Data.Repositories.Interfaces;
+
+public interface IRoomTypeRepository : IRepository<RoomType>
 {
-    internal interface IRoomTypeRepository
-    {
-    }
 }
